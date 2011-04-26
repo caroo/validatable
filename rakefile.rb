@@ -42,8 +42,15 @@ specification = Gem::Specification.new do |s|
   s.rdoc_options << '--title' << 'Validatable' << '--main' << 'README' << '--line-numbers'
 
   s.files = FileList['{lib,test}/**/*.rb', '[A-Z]*$', 'rakefile.rb'].to_a
-	s.test_file = "test/all_tests.rb"
 end
+
+desc "Generates gemspec file"
+task :gemspec do
+  File.open("validatable.gemspec", "w") do |f|
+    f.puts specification.to_ruby
+  end
+end
+
 
 Rake::GemPackageTask.new(specification) do |package|
   package.need_zip = false
