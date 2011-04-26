@@ -1,0 +1,22 @@
+--- 
+de:
+  validatable:
+    errors: 
+      # repräsentieren standard messages für alle activerecord validierungen
+      messages:
+        "must be accepted": %{attribute} muss akzeptiert werden.
+        "doesn't match confirmation": %{attribute} entspricht nicht der erneuten Eingabe.
+        "is invalid": %{attribute} hat ein ungültiges Format.
+        "must be a number": %{attribute} ist keine Zahl.
+        "can't be empty": %{attribute} muss vorhanden sein.
+      models:
+        validatable_class:
+          "is invalid": %{attribute} hat ein ungültiges Format(shallow).
+          attributes:
+            email:
+              "can't be empty": %{attribute} muss vorhanden sein(deep).
+    
+    attributes:
+      attribute_b: Attribut B
+      validatable_class:
+        attribute_a: Attribut A

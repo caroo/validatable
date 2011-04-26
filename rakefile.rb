@@ -5,8 +5,11 @@ require 'rake/contrib/sshpublisher'
 
 task :default => :test
 
-task :test do
-  require File.dirname(__FILE__) + '/test/all_tests.rb'
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
 end
 
 desc 'Generate RDoc'
@@ -23,8 +26,6 @@ desc "Upload RDoc to RubyForge"
 task :publish_rdoc => [:rdoc] do
   Rake::SshDirPublisher.new("jaycfields@rubyforge.org", "/var/www/gforge-projects/validatable", "doc").upload
 end
-
-Gem::manage_gems
 
 specification = Gem::Specification.new do |s|
 	s.name   = "validatable"

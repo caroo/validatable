@@ -1,4 +1,6 @@
 require 'forwardable'
+require 'i18n'
+require 'active_support'
 require File.expand_path(File.dirname(__FILE__) + '/object_extension')
 require File.expand_path(File.dirname(__FILE__) + '/errors')
 require File.expand_path(File.dirname(__FILE__) + '/validatable_class_methods')
@@ -8,6 +10,7 @@ require File.expand_path(File.dirname(__FILE__) + '/included_validation')
 require File.expand_path(File.dirname(__FILE__) + '/child_validation')
 require File.expand_path(File.dirname(__FILE__) + '/understandable')
 require File.expand_path(File.dirname(__FILE__) + '/requireable')
+require File.expand_path(File.dirname(__FILE__) + '/translator')
 require File.expand_path(File.dirname(__FILE__) + '/validations/validation_base')
 require File.expand_path(File.dirname(__FILE__) + '/validations/validates_format_of')
 require File.expand_path(File.dirname(__FILE__) + '/validations/validates_presence_of')
