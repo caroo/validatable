@@ -5,7 +5,9 @@ class Validatable::TranslatorTest < Test::Unit::TestCase
   attr_reader :to_validate
   def setup
     I18n.load_path ||= []
-    I18n.load_path << File.join(File.dirname(__FILE__), "../de.yml")
+    file = File.expand_path(File.join(File.dirname(__FILE__), "../de.yml"))
+    I18n.load_path << file unless I18n.load_path.include?(file)
+    
     I18n.locale = :de
     @to_validate = ValidatableClass.new
     @to_validate.valid?

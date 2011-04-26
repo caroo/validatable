@@ -17,8 +17,8 @@ module Validatable
         defaults = [:"models.#{base_class_name}.attributes.#{attribute}.#{message}", 
           :"models.#{base_class_name}.#{message}",
           :"messages.#{message}"]
-          defaults << message if message.is_a?(String) && !Validatable::Translator::VALIDATABLE_MESSAGES.include?(message)
-          I18n.translate(defaults.shift, options.merge(:default => defaults, :scope => [:validatable, :errors]))
+        defaults << message if message.is_a?(String) && !Validatable::Translator::VALIDATABLE_MESSAGES.include?(message)
+        I18n.translate(defaults.shift, options.merge(:default => defaults, :scope => [:validatable, :errors]))
       end
       translated.size == 1? translated.first : translated
     end

@@ -15,7 +15,11 @@ module Validatable
   #
   # Returns the Errors object that holds all information about attribute error messages.
   def errors
-    @errors ||= Validatable::Errors.new
+    @errors ||= begin
+      errors = Validatable::Errors.new
+      errors.base = self
+      errors
+    end
   end
   
   def valid_for_group?(group) #:nodoc:

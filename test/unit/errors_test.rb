@@ -30,7 +30,7 @@ Expectations do
     errors.humanize("capitalized_word_without_id")
   end
   
-  expect ["A humanized message", "a base message"] do
+  expect ["a base message", "message"] do
     errors = Validatable::Errors.new
     errors.add(:base, "a base message")
     errors.add(:a_humanized, "message")

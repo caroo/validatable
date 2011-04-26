@@ -5,11 +5,15 @@ require 'rake/contrib/sshpublisher'
 
 task :default => :test
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
+# require 'rake/testtask'
+# Rake::TestTask.new(:test) do |test|
+#   test.libs << 'test'
+#   test.pattern = 'test/**/*_test.rb'
+#   test.verbose = true
+# end
+
+task :test do
+  sh "testrb -Itest:lib test/unit/*_test.rb test/functional/*_test.rb"
 end
 
 desc 'Generate RDoc'

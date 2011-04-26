@@ -2,8 +2,9 @@ module Validatable
   class Errors
     extend Forwardable
     include Enumerable
+    attr_accessor :base
 
-    def_delegators :errors, :clear, :each, :each_pair, :empty?, :length, :size
+    def_delegators :errors, :clear, :each, :each_pair, :empty?, :length, :size, :[]
 
     # call-seq: on(attribute)
     # 
@@ -46,23 +47,28 @@ module Validatable
     def count #:nodoc:
       errors.values.flatten.size
     end
+    
+    def each_full
+      each do |attribute, messages|
+        messages = [Validatable::Translator.translate_messages(base, attribute, messages)].flatten
+        messages.each { |message| yield message}
+      end
+    end
+    
+    def each_error
+      each do |attribute, messages|
+        messages = [Validatable::Translator.translate_messages(base, attribute, messages)].flatten
+        messages.each {|message| yield attribute, message}
+      end
+    end
 
     # call-seq: full_messages -> an_array_of_messages
     # 
     # Returns an array containing the full list of error messages.
     def full_messages
       full_messages = []
-
-      errors.each_key do |attribute|
-        errors[attribute].each do |msg|
-          next if msg.nil?
-
-          if attribute.to_s == "base"
-            full_messages << msg
-          else
-            full_messages << humanize(attribute.to_s) + " " + msg
-          end
-        end
+      each_full do |message|
+        full_messages << message
       end
       full_messages
     end
